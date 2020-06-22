@@ -1,5 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+        <section class="page-section" id="contact">
+            <div class="container">
+                <!-- Contact Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Login Jira</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Contact Section Form-->
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <form id="contactForm" action="{% url 'jira_login' %}"  method="post" novalidate="novalidate">
+                             {% csrf_token %}
+                            <div class="control-group">
+                                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                    <label>User Name</label>
+                                    <input class="form-control" name="username" type="text" placeholder="User Name" required="required" data-validation-required-message="Please enter your username." />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                    <label>Password</label>
+                                    <input class="form-control" name="password" type="password" placeholder="Password" required="required" data-validation-required-message="Please enter your password." />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <br />
+                            <div id="success"></div>
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 {% endblock %}
