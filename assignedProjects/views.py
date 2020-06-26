@@ -10,6 +10,9 @@ from django.shortcuts import redirect, render
 from django.views.generic import TemplateView, View
 from jira import JIRA, JIRAError
 import logging
+from jira.client import GreenHopper
+from jira.resources import GreenHopperResource
+
 
 
 class LoginJira(TemplateView):
@@ -74,6 +77,26 @@ class JiraDashboard(TemplateView):
         try:
             jira = JIRA(options=jira_options, basic_auth=(username, password), max_retries=0)
             projects = jira.projects()
+            project = jira.project(projects[0].id)
+            project
+            # gh = GreenHopper(options=jira_options, basic_auth=(username, password))
+            #
+            # # Get all boards viewable by anonymous users.
+            # boards = gh.boards(type='scrum')
+
+            first_project = jira.project(projects[0].id)
+            onboard = jira.boards(maxResults=1, type='scrum')
+
+            sprint = jira.sprints(jira.boards()[0].id)
+
+            jira.sprint_info(jira.boards()[0].id, sprint[0].id)
+            oh_crap = jira.search_issues('assignee = currentUser()',
+                                         maxResults=50)
+
+
+            # issues_in_project = jira.search_issues(
+            #     'project=12118 AND SPRINT not in closedSprints() AND sprint in futureSprints()')
+
             return render(request, self.template_name, {
                 'user': request.user,
                 'projects': projects
