@@ -76,21 +76,32 @@ WSGI_APPLICATION = 'kiwiProject.wsgi.application'
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
+#         'ENGINE': 'dynamodb_sessions.backends.dynamodb',
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'dynamodb_sessions.backends.dynamodb',
+#         'NAME': os.path.join(BASE_DIR, 'db.dynamodb'),
+#     }
+# }
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'jira_db',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+# DYNAMODB_SESSIONS_AWS_ACCESS_KEY_ID = 'AKIA4BY3A6QWMXWAJSKE'
+# DYNAMODB_SESSIONS_AWS_SECRET_ACCESS_KEY = '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'
+
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'jira_db',
+#         'USER': 'postgres',
+#         'PASSWORD': 'root',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
