@@ -74,9 +74,15 @@ class JiraDashboard(TemplateView):
         try:
             jira = JIRA(options=jira_options, basic_auth=(username, password), max_retries=0)
             projects = jira.projects()
+            data = []
+            for p_data in projects:
+                if p_data.id:
+                    val = {'jira': p_data, 'details': jira.project(p_data.id)}
+                    data.append(val)
             return render(request, self.template_name, {
                 'user': request.user,
-                'projects': projects
+                'projects': data,
+                'request': request
             })
         except JIRAError as e:
             logging.error("Failed to connect to JIRA: %s" % e)
